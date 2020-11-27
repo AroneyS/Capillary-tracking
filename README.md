@@ -214,6 +214,10 @@ Output:
 Run in R.
 Converts matlab '\*\_analysed.mat' files to '\*.csv'.
 
+Edit (wrangling section):
+- chosen_folders: vector of file.paths containing '\*\_analysed.mat' files
+- output_file: name of compiled csv file
+
 ## Output files
 ### Used in R script
 - ts: time coordinates (seconds)
