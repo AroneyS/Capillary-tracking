@@ -11,7 +11,7 @@ Change RAM allocation in Fiji from Edit/Options/Memory&Threads (>10GB ideally).
 
 Where position is bottom, middle or top (section of capillary imaged), replicate is biological replicate and video is technical replicate
 
-## ImageJ script 1 (batch): imagej\_stage\_1\_version2.0.ijm
+## ImageJ script 1 (batch): imagej\_stage\_1.ijm
 Select a folder and run below on all files in it.
 Runs steps 1-6 with the standard settings (steps 2 and 6 are skipped where unnecessary).
 Step 6 is run (and Step 2 skipped) when filename ends in ‘\_F’. 
@@ -211,7 +211,7 @@ Output:
 
 ## R script 1: matlab\_to\_csv-with\_analysis.R
 Run in R.
-Converts matlab '\*.mat' files to '\*.csv'.
+Converts matlab '\*\_analysed.mat' files to '\*.csv'.
 
 ## Output files
 ### Used in R script
