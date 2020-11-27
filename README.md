@@ -7,16 +7,16 @@ Matlab
 Change RAM allocation in Fiji from Edit/Options/Memory&Threads (>10GB ideally).
 
 ## File naming Scheme
-“strain_position_media_replicate_video_experiment-.avi”
+“strain\_position\_media\_replicate\_video\_experiment-.avi”
 
 Where position is bottom, middle or top (section of capillary imaged), replicate is biological replicate and video is technical replicate
 
-## ImageJ script 1 (batch): imagej_stage_1_version2.0.ijm
+## ImageJ script 1 (batch): imagej\_stage\_1\_version2.0.ijm
 Select a folder and run below on all files in it.
 Runs steps 1-6 with the standard settings (steps 2 and 6 are skipped where unnecessary).
-Step 6 is run (and Step 2 skipped) when filename ends in ‘_F’. 
+Step 6 is run (and Step 2 skipped) when filename ends in ‘\_F’. 
 Set ROIs manually using position of non-swimming particle in same plane as swimmers. 
-Select all points and save these in subfolder ROI within video folder (RoiSet_[filename].zip).
+Select all points and save these in subfolder ROI within video folder (RoiSet\_[filename].zip).
 
 
 ### 1. Fiji/ImageJ importing (.avi -> .tif)
@@ -138,7 +138,7 @@ Check both Quality and Standard deviation for clear bimodal distribution and sel
 
 Hit next before saving to ensure the filtering is saved.
 Save spots to file.
-Suffix: -initial_spots.xml.
+Suffix: -initial\_spots.xml.
 
 Tracker: Simple LAP tracker
 - No initial thresholding.
@@ -152,15 +152,15 @@ Filter tracks to remove motile spots.
 
 Hit next before saving to ensure the filtering is saved.
 Save tracks to file.
-Suffix: -nonmotile_tracks.xml.
+Suffix: -nonmotile\_tracks.xml.
 
-## Python Script 1 (batch): remove_tracked_spots.py
-Removes spots found in *-nonmotile_tracks.xml from *-initial_spots.xml, producing *-motile_spots.xml.
+## Python Script 1 (batch): remove\_tracked_spots.py
+Removes spots found in \*-nonmotile\_tracks.xml from \*-initial\_spots.xml, producing \*-motile\_spots.xml.
 Effectively, this removes the nonmotile spots from interfering with motile tracks. 
 
 ## TrackMate Part 2 (if removing non-motile particles)
 Plugins/Tracking/Load a trackmate file
-Load generated files. Suffix: -motile_spots.xml.
+Load generated files. Suffix: -motile\_spots.xml.
 
 Tracker: Linear motion LAP tracker
 - Max search radius: 10 (maximum movement distance per frame, 100um/s)
@@ -175,9 +175,9 @@ Try to keep immobile bacteria for swimming fraction calculations.
 
 Hit next before saving to ensure the filtering is saved.
 Save tracks to file.
-Suffix: -motile_tracks.xml.
+Suffix: -motile\_tracks.xml.
 
-## ImageJ script 2 (batch): FijiScript_export_manual_for_rhizobia-batch.py
+## ImageJ script 2 (batch): FijiScript\_export\_manual\_for\_rhizobia-batch.py
 Generates spreadsheets of trajectory data for Matlab scripts from manually run TrackMate.
 If spot morphology was not tracked, semiaxislengths and phi are set to 0.
 
@@ -185,10 +185,10 @@ Edit:
 - inpath = path to ‘.xml’ files
 - outpath = path to place output ‘.csv’ files
 
-## Matlab script 1 (batch): loadtrackmate_orientation2.m
+## Matlab script 1 (batch): loadtrackmate\_orientation2.m
 Run in Matlab.
 Loads data from ‘[filename].csv’ to form data structure.
-Runs ‘loadtrackmate_orientation2_function.m’ on all the ‘.csv’ files in a directory.
+Runs ‘loadtrackmate\_orientation2\_function.m’ on all the ‘.csv’ files in a directory.
 
 Edit:
 - minnumbspots = 10 (threshold for minimum number of points in a track, 1s at 10fps)
@@ -196,31 +196,31 @@ Edit:
 Output: 
 - ‘[filename].mat’ (data structure)
 
-## Matlab script 2 (batch): rhizobia_general_analysis.m
+## Matlab script 2 (batch): rhizobia\_general\_analysis.m
 Run in Matlab.
 Updates data structure from above with tumble and mean squared displacement analysis. 
 
 Edit:
 - Frametime = 0.1 (fps of images)
 - thresholds.tumble = deg2rad(2500) (tumble radians/s cutoff in dtheta/dt vs t plot)
-- thresholds.angle_bounds = 0.02 (time before and after reorientation event to find total angle)
+- thresholds.angle\_bounds = 0.02 (time before and after reorientation event to find total angle)
 - coverage = 1000 (Number of spline smoothing points for each real point)
 
 Output: 
-- ‘[filename]_analysed.mat’ (saved analysis with updated data structure)
+- ‘[filename]\_analysed.mat’ (saved analysis with updated data structure)
 
-## R script 1: matlab_to_csv-with_analysis.R
+## R script 1: matlab\_to\_csv-with\_analysis.R
 Run in R.
-Converts matlab '*.mat' files to '*.csv'.
+Converts matlab '\*.mat' files to '\*.csv'.
 
 ## Output files
 ### Used in R script
 - ts: time coordinates (seconds)
 - x: x-coordinates (microns)
 - y: y-coordinates (microns)
-- extract_velo: velocity from spline at track times
+- extract\_velo: velocity from spline at track times
 - locs: time coordinates of peaks
-- spline_angle: angle at peak points
+- spline\_angle: angle at peak points
 - msd: mean squared displacement (mean, sd, n, intercept, slope). Linear model fit statistics, linear indicates Brownian motion, non-linear increasing directed motion, non-linear decreasing constrained with the intercept estimating measurement error.
 
 ### Extra values
@@ -230,18 +230,18 @@ Converts matlab '*.mat' files to '*.csv'.
 - phi: movement direction of cell
 - meanintens: average intensity
 - duration: duration of track (seconds)
-- scale_points: boundaries for spline values
-- splinex_gof: goodness of fit for x spline (sse, rsquare, dfe, adjrsquare, rmse)
-- splinex_fit: fit data for x spline (numobs, numparam, residuals, Jacobian, exitflag, p)
-- spliney_gof: goodness of fit for y spline (sse, rsquare, dfe, adjrsquare, rmse)
-- spliney_fit: fit data for y spline (numobs, numparam, residuals, Jacobian, exitflag, p)
-- peaks: value of peaks detected in spline_head
+- scale\_points: boundaries for spline values
+- splinex\_gof: goodness of fit for x spline (sse, rsquare, dfe, adjrsquare, rmse)
+- splinex\_fit: fit data for x spline (numobs, numparam, residuals, Jacobian, exitflag, p)
+- spliney\_gof: goodness of fit for y spline (sse, rsquare, dfe, adjrsquare, rmse)
+- spliney\_fit: fit data for y spline (numobs, numparam, residuals, Jacobian, exitflag, p)
+- peaks: value of peaks detected in spline\_head
 
 ### Removed due to space constraints
-- spline_ts: time coordinates used for spline (seconds)
+- spline\_ts: time coordinates used for spline (seconds)
 - splinex: x-coordinates for spline (microns)
 - spliney: y-coordinates for spline (microns)
-- spline_velo: velocity across spline
-- spline_acc: acceleration across spline
-- spline_head: angle heading from spline
-- spline_dhead: change in spline.head
+- spline\_velo: velocity across spline
+- spline\_acc: acceleration across spline
+- spline\_head: angle heading from spline
+- spline\_dhead: change in spline.head
