@@ -186,10 +186,10 @@ Edit:
 - inpath = path to ‘.xml’ files
 - outpath = path to place output ‘.csv’ files
 
-## Matlab script 1 (batch): loadtrackmate\_orientation2.m
+## Matlab script 1 (batch): loadtrackmate\_orientation.m
 Run in Matlab.
 Loads data from ‘[filename].csv’ to form data structure.
-Runs ‘loadtrackmate\_orientation2\_function.m’ on all the ‘.csv’ files in a directory.
+Runs ‘loadtrackmate\_orientation\_function.m’ on all the ‘.csv’ files in a directory.
 
 Edit:
 - minnumbspots = 10 (threshold for minimum number of points in a track, 1s at 10fps)
