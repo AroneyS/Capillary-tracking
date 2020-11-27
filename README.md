@@ -177,11 +177,12 @@ Hit next before saving to ensure the filtering is saved.
 Save tracks to file.
 Suffix: -motile\_tracks.xml.
 
-## ImageJ script 2 (batch): FijiScript\_export\_manual\_for\_rhizobia-batch.py
+## ImageJ script 2 (batch): imagej\_stage\_2.py
 Generates spreadsheets of trajectory data for Matlab scripts from manually run TrackMate.
 If spot morphology was not tracked, semiaxislengths and phi are set to 0.
 
 Edit:
+- directory = base directory for paths
 - inpath = path to ‘.xml’ files
 - outpath = path to place output ‘.csv’ files
 
